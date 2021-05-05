@@ -10,6 +10,8 @@ import { ListAppointmentsComponent } from './list-appointments/list-appointments
 import { RouterModule, Routes } from '@angular/router';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
 import { Appointment } from './shared/models/appointment-model';
+import {DialogDataExampleDialogComponent} from './add-appointment/dialog-data-example-dialog.component';
+import {FormsModule} from '@angular/forms';
 
 
 const routes: Routes = [
@@ -26,7 +28,8 @@ const routes: Routes = [
     HomeComponent,
     AddAppointmentComponent,
     ListAppointmentsComponent,
-    EditAppointmentComponent
+    EditAppointmentComponent,
+    DialogDataExampleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MaterialComponentsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

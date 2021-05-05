@@ -1,0 +1,26 @@
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.mat-card {
+  align-items: center;
+}
+
+.mat-card-actions {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+table tr td {
+  width: auto;
+  min-width: 110px;
+  padding: 0 10px;
+}
+
+.mat-dialog-content {
+  height: 100%;
+}
