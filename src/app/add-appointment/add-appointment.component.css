@@ -15,11 +15,6 @@
   display: flex;
 }
 
-table tr td {
-  width: auto;
-  min-width: 110px;
-  padding: 0 10px;
-}
 
 .mat-dialog-content {
   height: 100%;

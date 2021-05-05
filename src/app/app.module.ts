@@ -12,6 +12,7 @@ import { Appointment } from './shared/models/appointment-model';
 import {DialogDataExampleDialogComponent} from './add-appointment/dialog-data-example-dialog.component';
 import {FormsModule} from '@angular/forms';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import {SummaryPipe} from './shared/summary.pipe';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
     ListAppointmentsComponent,
     EditAppointmentComponent,
     DialogDataExampleDialogComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SummaryPipe
   ],
   imports: [
     BrowserModule,
