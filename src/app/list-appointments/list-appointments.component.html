@@ -28,10 +28,10 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let appointment">
       <button mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon [routerLink]="['/edit', appointment.identifier]">more_vert</mat-icon>
       </button>
       <button mat-icon-button color="warn">
-        <mat-icon>delete</mat-icon>
+        <mat-icon (click)="delete(appointment)">delete</mat-icon>
       </button>
     </td>
   </ng-container>

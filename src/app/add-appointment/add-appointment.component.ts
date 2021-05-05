@@ -23,7 +23,7 @@ export class AddAppointmentComponent implements OnInit {
   appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
   appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
 
-  participants: Participant[] = [];
+  mockParticipants: Participant[] = [];
 
   actor: ParticipantActor;
   required: ParticipantRequired;
@@ -50,14 +50,14 @@ export class AddAppointmentComponent implements OnInit {
         status: result.status
       };
 
-      this.participants.push(newParticipant);
+      this.mockParticipants.push(newParticipant);
       this.table.renderRows();
     });
   }
 
   delete(participant): void {
-    const idx = this.participants.indexOf(participant);
-    this.participants.splice(idx, 1);
+    const idx = this.mockParticipants.indexOf(participant);
+    this.mockParticipants.splice(idx, 1);
     this.table.renderRows();
   }
 }

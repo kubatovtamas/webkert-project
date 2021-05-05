@@ -13,6 +13,7 @@ import {DialogDataExampleDialogComponent} from './add-appointment/dialog-data-ex
 import {FormsModule} from '@angular/forms';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {SummaryPipe} from './shared/summary.pipe';
+import {AppointmentsService} from './shared/appointments.service';
 
 
 const routes: Routes = [
@@ -41,7 +42,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [],
+  providers: [AppointmentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
