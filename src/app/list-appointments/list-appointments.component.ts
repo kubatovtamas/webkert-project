@@ -50,6 +50,17 @@ export class ListAppointmentsComponent implements OnInit {
     }
   ];
 
+  displayedColumns: string[] = [
+    'status',
+    'identifier',
+    'appointmentType',
+    'priority',
+    'description',
+    'start',
+    'duration',
+    'buttons'
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
 import { Appointment } from './shared/models/appointment-model';
 
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'list', component: ListAppointmentsComponent },
