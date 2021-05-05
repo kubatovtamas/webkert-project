@@ -45,13 +45,15 @@ export class AddAppointmentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       const newParticipant: Participant = {
-        actor: result.actor,
-        required: result.required,
-        status: result.status
+        actor: result?.actor,
+        required: result?.required,
+        status: result?.status
       };
 
-      this.mockParticipants.push(newParticipant);
-      this.table.renderRows();
+      if (newParticipant.actor && newParticipant.required && newParticipant.status) {
+        this.mockParticipants.push(newParticipant);
+        this.table.renderRows();
+      }
     });
   }
 

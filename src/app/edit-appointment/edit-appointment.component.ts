@@ -10,6 +10,14 @@ import {AppointmentsService} from '../shared/appointments.service';
   styleUrls: ['./edit-appointment.component.css']
 })
 export class EditAppointmentComponent implements OnInit {
+  displayedColumns: string[] = [
+    'actor',
+    'status',
+    'required',
+  ];
+
+  appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
+
   appointment: Appointment;
 
   constructor(private router: Router,
@@ -19,8 +27,11 @@ export class EditAppointmentComponent implements OnInit {
   ngOnInit(): void {
     const params = this.route.snapshot.paramMap;
     const id = (params.get('id') as string);
-    const appointment = this.appointmentsService.getAppointmentById(id);
-    console.log(appointment);
+    this.appointment = this.appointmentsService.getAppointmentById(id);
+    console.log(this.appointment);
   }
 
+  save(): void {
+    console.log(this.appointment);
+  }
 }

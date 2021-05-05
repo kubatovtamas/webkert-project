@@ -1,0 +1,38 @@
+.main-div{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mat-card-actions {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+table.mat-table {
+  width: 100%;
+}
+
+mat-list-item {
+  justify-content: center;
+}
+.example-spacer {
+  margin: 30px;
+  float: right;
+}
+
+.left {
+  float:left;
+  width:50%;
+}
+
+.right {
+  float:right;
+  width:50%;
+}
+
+.szopki {
+
+  width: 20rem;
+}
