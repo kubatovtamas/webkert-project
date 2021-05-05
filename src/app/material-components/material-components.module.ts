@@ -14,6 +14,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {
   NgxMatDatetimePickerModule,
@@ -40,7 +42,9 @@ import {
     NgxMatNativeDateModule,
     MatListModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule,
+    MatToolbarModule
   ],
   exports: [
     MatIconModule,
@@ -60,7 +64,9 @@ import {
     NgxMatNativeDateModule,
     MatListModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule,
+    MatToolbarModule
   ]
 })
 export class MaterialComponentsModule {}

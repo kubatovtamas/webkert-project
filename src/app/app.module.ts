@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
 import { AddAppointmentComponent } from './add-appointment/add-appointment.component';
 import { ListAppointmentsComponent } from './list-appointments/list-appointments.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,24 +11,24 @@ import { EditAppointmentComponent } from './edit-appointment/edit-appointment.co
 import { Appointment } from './shared/models/appointment-model';
 import {DialogDataExampleDialogComponent} from './add-appointment/dialog-data-example-dialog.component';
 import {FormsModule} from '@angular/forms';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
   { path: 'list', component: ListAppointmentsComponent },
   { path: 'add', component: AddAppointmentComponent },
   { path: 'edit/:id', component: EditAppointmentComponent },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  { path: '**', redirectTo: '/list', pathMatch: 'full' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     AddAppointmentComponent,
     ListAppointmentsComponent,
     EditAppointmentComponent,
-    DialogDataExampleDialogComponent
+    DialogDataExampleDialogComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
