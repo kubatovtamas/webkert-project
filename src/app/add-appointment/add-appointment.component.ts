@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogDataExampleDialogComponent} from './dialog-data-example-dialog.component';
-import {Participant} from '../shared/models/appointment-model';
+import {Participant, ParticipantActor, ParticipantRequired, ParticipantStatus} from '../shared/models/appointment-model';
 import {MatTable} from '@angular/material/table';
 
 
@@ -11,15 +11,6 @@ import {MatTable} from '@angular/material/table';
   styleUrls: ['./add-appointment.component.css']
 })
 export class AddAppointmentComponent implements OnInit {
-  appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
-
-  appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
-
-  participants: Participant[] = [
-    {status: 'needs-action', actor: 'patient', required: 'required'},
-    {status: 'accepted', actor: 'practitioner', required: 'required'}
-  ];
-
   displayedColumns: string[] = [
     'actor',
     'status',
@@ -29,9 +20,14 @@ export class AddAppointmentComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  actor: 'patient' | 'practitioner' | 'practitioner-role' | 'related-person' | 'device' | 'healthcare-service' | 'location';
-  required: 'required' | 'optional' | 'information-only';
-  status: 'accepted' | 'declined' | 'tentative' | 'needs-action';
+  appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
+  appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
+
+  participants: Participant[] = [];
+
+  actor: ParticipantActor;
+  required: ParticipantRequired;
+  status: ParticipantStatus;
 
   constructor(public dialog: MatDialog) {}
 
@@ -48,13 +44,13 @@ export class AddAppointmentComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      const newAppointment = {
+      const newParticipant: Participant = {
         actor: result.actor,
         required: result.required,
         status: result.status
       };
 
-      this.participants.push(newAppointment);
+      this.participants.push(newParticipant);
       this.table.renderRows();
     });
   }
