@@ -1,1 +1,5 @@
-<p>list-appointments works!</p>
+<ul>
+  <li *ngFor="let appointment of mockAppointments">
+    {{ appointment | json }}
+  </li>
+</ul>

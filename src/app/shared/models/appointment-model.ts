@@ -1,12 +1,12 @@
 export interface Appointment {
   status: 'proposed' | 'pending' | 'booked' | 'arrived' | 'fulfilled' | 'cancelled' | 'no-show' | 'entered-in-error' | 'checked-in' | 'wait-list';
+  participants: Participant[];
   identifier?: string;
   appointmentType?: 'check-up' | 'emergency' | 'follow-up' | 'routine' | 'walk-in';
   priority?: number;
   description?: string;
   start?: Date;
   duration?: number;
-  participants: Participant[];
 }
 
 export interface Participant {
