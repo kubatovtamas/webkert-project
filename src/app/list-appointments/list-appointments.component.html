@@ -17,7 +17,6 @@
   <ng-container matColumnDef="start">
     <th mat-header-cell *matHeaderCellDef> Start </th>
     <td mat-cell *matCellDef="let appointment"> {{appointment.start.toDate() | date: 'YYYY.MM.dd HH:mm' }} </td>
-<!--    <td mat-cell *matCellDef="let appointment"> {{appointment.start}} </td>-->
   </ng-container>
 
   <ng-container matColumnDef="duration">
@@ -29,7 +28,7 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let appointment">
       <button mat-icon-button>
-        <mat-icon [routerLink]="['/edit', appointment.identifier]">more_vert</mat-icon>
+        <mat-icon [routerLink]="['/edit', appointment.id]">more_vert</mat-icon>
       </button>
       <button mat-icon-button color="warn">
         <mat-icon (click)="delete(appointment)">delete</mat-icon>

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Appointment} from '../shared/models/appointment-model';
 import {ListAppointmentsComponent} from '../list-appointments/list-appointments.component';
 import {AppointmentsService} from '../shared/appointments.service';
+import {AngularFirestoreDocument} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-edit-appointment',
@@ -16,9 +17,8 @@ export class EditAppointmentComponent implements OnInit {
     'required',
   ];
 
-  // appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
-
-  appointment: Appointment;
+  appointment;
+  participantList;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -27,11 +27,24 @@ export class EditAppointmentComponent implements OnInit {
   ngOnInit(): void {
     const params = this.route.snapshot.paramMap;
     const id = (params.get('id') as string);
-    // this.appointment = this.appointmentsService.getAppointmentById(id);
-    console.log(this.appointment);
+
+    this.appointmentsService.getById('appointments', id).ref.get().then((doc) => {
+      if (doc.exists) {
+        this.appointment = doc.data();
+
+        this.appointmentsService.get('participants').subscribe(
+          data => {
+            this.participantList = data;
+          }
+        );
+      }
+    });
   }
 
   save(): void {
+    this.appointmentsService.update('appointments', this.appointment.id, {
+        status: this.appointment.status
+    });
     console.log(this.appointment);
   }
 }

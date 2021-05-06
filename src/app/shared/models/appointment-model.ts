@@ -1,7 +1,7 @@
 export interface Appointment {
+  id?: string;
   status: AppointmentStatus;
   participants: Participant[];
-  id?: string;
   appointmentType?: AppointmentType;
   priority?: number;
   description?: string;
@@ -13,6 +13,7 @@ export type AppointmentStatus = 'proposed' | 'pending' | 'booked' | 'arrived' | 
 export type AppointmentType = 'check-up' | 'emergency' | 'follow-up' | 'routine' | 'walk-in';
 
 export interface Participant {
+  id?: string;
   status: ParticipantStatus;
   actor?: ParticipantActor;
   required?: ParticipantRequired;

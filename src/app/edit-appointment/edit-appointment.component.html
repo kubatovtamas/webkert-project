@@ -14,7 +14,7 @@
       </mat-list-item>
 <!--      <mat-list-item role="listitem"> <span class="left"> Status: </span> <span class="right"> {{appointment.status | titlecase}} </span> </mat-list-item>-->
       <mat-list-item role="listitem"> <span class="left">Participants: </span> </mat-list-item>
-      <table mat-table [dataSource]="appointment.participants">
+      <table mat-table [dataSource]="participantList">
         <ng-container matColumnDef="actor">
           <th mat-header-cell *matHeaderCellDef> Actor </th>
           <td mat-cell *matCellDef="let participant"> {{participant.actor | titlecase}} </td>
@@ -36,13 +36,13 @@
       <mat-list-item role="listitem"> <span class="left"> Appointment Type: </span> <span class="right"> {{appointment.appointmentType | titlecase}} </span> </mat-list-item>
       <mat-list-item role="listitem"> <span class="left"> Priority: </span> <span class="right">{{appointment.priority}} </span> </mat-list-item>
       <mat-list-item role="listitem"> <span class="left"> Description: </span> <span class="right"> {{appointment.description}} </span> </mat-list-item>
-      <mat-list-item role="listitem"> <span class="left"> Starts at: </span> <span class="right"> {{appointment.start | date: 'YYYY.MM.dd HH:mm'}} </span> </mat-list-item>
+      <mat-list-item role="listitem"> <span class="left"> Starts at: </span> <span class="right"> {{appointment.start.toDate() | date: 'YYYY.MM.dd HH:mm'}} </span> </mat-list-item>
       <mat-list-item role="listitem"> <span class="left"> Duration: </span> <span class="right"> {{appointment.duration}} minutes. </span> </mat-list-item>
     </mat-list>
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="save()">Save</button>
+    <button mat-raised-button color="primary" (click)="save()" routerLink="/list">Save</button>
     <button mat-raised-button routerLink="/list">Back</button>
   </mat-card-actions>
 </mat-card>

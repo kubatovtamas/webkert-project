@@ -1,19 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Appointment} from './models/appointment-model';
-import {AngularFirestore, CollectionReference, Query} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreDocument, CollectionReference, Query} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentsService {
-  // getAppointmentById(id: string): Appointment {
-  //   // tslint:disable-next-line:prefer-for-of
-  //   for (let i = 0; i < this.mockAppointments.length; i++) {
-  //     if (this.mockAppointments[i].identifier === id) { return this.mockAppointments[i]; }
-  //   }
-  //   return null;
-  // }
 
   appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
   appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
@@ -32,12 +25,16 @@ export class AppointmentsService {
     return uid;
   }
 
-  get(collectionName: string): Observable<Appointment[]> {
+  get(collectionName: string): Observable<any[]> {
     return this.afs.collection(collectionName, ref  => {
       const query: CollectionReference | Query = ref;
       // query = query.orderBy('title', 'asc');
       return query;
-    }).valueChanges() as Observable<Appointment[]>;
+    }).valueChanges() as Observable<any[]>;
+  }
+
+  getById(collectionName: string, id: string): AngularFirestoreDocument<unknown> {
+    return this.afs.collection(collectionName).doc(id);
   }
 
   async update(collectionName: string, id: string, data: any): Promise<string> {

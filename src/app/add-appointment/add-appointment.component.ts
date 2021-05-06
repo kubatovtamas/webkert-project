@@ -21,9 +21,6 @@ export class AddAppointmentComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  // appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
-  // appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
-
   mockParticipants: Participant[] = [];
 
   actor: ParticipantActor;

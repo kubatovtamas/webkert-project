@@ -9,10 +9,6 @@ import {AppointmentsService} from '../shared/appointments.service';
   styleUrls: ['./list-appointments.component.css']
 })
 export class ListAppointmentsComponent implements OnInit {
-  appointmentList;
-
-  constructor(private appointmentsService: AppointmentsService) { }
-
   displayedColumns: string[] = [
     'status',
     'appointmentType',
@@ -22,11 +18,19 @@ export class ListAppointmentsComponent implements OnInit {
     'buttons'
   ];
 
+  appointmentList;
+
   @ViewChild(MatTable) table: MatTable<any>;
 
+  constructor(private appointmentsService: AppointmentsService) { }
+
   ngOnInit(): void {
-    this.appointmentList = this.appointmentsService.get('appointments');
-    console.log(this.appointmentList);
+    this.appointmentsService.get('appointments').subscribe(
+      data => {
+        this.appointmentList = data;
+        console.log(data);
+      }
+    );
   }
 
   delete(appointment): void {
@@ -34,4 +38,6 @@ export class ListAppointmentsComponent implements OnInit {
     this.appointmentList.splice(idx, 1);
     this.table.renderRows();
   }
+
+
 }
