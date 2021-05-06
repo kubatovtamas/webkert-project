@@ -45,6 +45,5 @@ export class EditAppointmentComponent implements OnInit {
     this.appointmentsService.update('appointments', this.appointment.id, {
         status: this.appointment.status
     });
-    console.log(this.appointment);
   }
 }

@@ -25,19 +25,27 @@ export class ListAppointmentsComponent implements OnInit {
   constructor(private appointmentsService: AppointmentsService) { }
 
   ngOnInit(): void {
+    const debugAppointment: Appointment = {
+      status: 'proposed',
+      participants: [],
+      appointmentType: 'routine',
+      priority: 8,
+      description: 'kekw',
+      start: new Date(2020, 3, 5, 12, 0),
+      duration: 50
+    };
+
     this.appointmentsService.get('appointments').subscribe(
       data => {
         this.appointmentList = data;
-        console.log(data);
       }
     );
+
+    this.appointmentsService.add('appointments', debugAppointment);
   }
 
-  delete(appointment): void {
-    const idx = this.appointmentList.indexOf(appointment);
-    this.appointmentList.splice(idx, 1);
+  delete(id): void {
+    this.appointmentsService.delete('appointments', id);
     this.table.renderRows();
   }
-
-
 }

@@ -19,7 +19,7 @@ export class AppointmentsService {
 
   async add(collectionName: string, data: Appointment, id?: string): Promise<string> {
     const uid = id ? id : this.afs.createId();
-    // data.id = uid;
+    data.id = uid;
     await this.afs.collection(collectionName).doc(uid).set(data);
     // await this.afs.collection(collectionName).add(data);
     return uid;

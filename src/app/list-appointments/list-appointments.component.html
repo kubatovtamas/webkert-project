@@ -31,7 +31,7 @@
         <mat-icon [routerLink]="['/edit', appointment.id]">more_vert</mat-icon>
       </button>
       <button mat-icon-button color="warn">
-        <mat-icon (click)="delete(appointment)">delete</mat-icon>
+        <mat-icon (click)="delete(appointment.id)">delete</mat-icon>
       </button>
     </td>
   </ng-container>

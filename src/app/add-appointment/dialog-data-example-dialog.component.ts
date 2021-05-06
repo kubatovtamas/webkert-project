@@ -10,18 +10,6 @@ import {AppointmentsService} from '../shared/appointments.service';
   styleUrls: ['./add-appointment.component.css']
 })
 export class DialogDataExampleDialogComponent {
-  // participantStatusOptions = [
-  //   'accepted', 'declined', 'tentative', 'needs-action'
-  // ];
-  //
-  // participantActorOptions = [
-  //   'patient', 'practitioner', 'practitioner-role', 'related-person', 'device', 'healthcare-service', 'location'
-  // ];
-  //
-  // participantRequiredOptions = [
-  //   'required', 'optional', 'information-only'
-  // ];
-
   constructor(public dialogRef: MatDialogRef<DialogDataExampleDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Participant,
               public appointmentService: AppointmentsService) {}
