@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddAppointmentComponent } from './add-appointment/add-appointment.component';
 import { ListAppointmentsComponent } from './list-appointments/list-appointments.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +14,7 @@ import {AppointmentsService} from './shared/appointments.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'list', component: ListAppointmentsComponent },
@@ -36,7 +36,6 @@ const routes: Routes = [
     BrowserModule,
     RouterModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     MaterialComponentsModule,
     RouterModule.forRoot(routes),
     FormsModule,

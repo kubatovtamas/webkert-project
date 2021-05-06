@@ -16,6 +16,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {
   NgxMatDatetimePickerModule,
@@ -44,7 +45,8 @@ import {
     MatDialogModule,
     MatGridListModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatIconModule,
@@ -66,7 +68,8 @@ import {
     MatDialogModule,
     MatGridListModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialComponentsModule {}
