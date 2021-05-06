@@ -6,13 +6,13 @@
       <mat-label>Status</mat-label>
       <mat-select>
         <mat-option value=""></mat-option>
-        <mat-option *ngFor="let status of appointmentStatusOptions" value="status"> {{status | titlecase}} </mat-option>
+        <mat-option *ngFor="let status of this.appointmentService.appointmentStatusOptions" value="status"> {{status | titlecase}} </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-label>Appointment Type</mat-label>
     <mat-button-toggle-group vertical name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle *ngFor="let type of appointmentTypeOptions" value="type"> {{type | titlecase}}</mat-button-toggle>
+        <mat-button-toggle *ngFor="let type of this.appointmentService.appointmentTypeOptions" value="type"> {{type | titlecase}}</mat-button-toggle>
     </mat-button-toggle-group>
 
     <mat-label>Priority</mat-label>

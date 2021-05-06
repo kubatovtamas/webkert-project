@@ -5,10 +5,10 @@
   <mat-card-content>
     <mat-list role="list">
       <mat-list-item role="listitem">
-        <mat-form-field appearance="fill" class="szopki">
+        <mat-form-field appearance="fill" class="wide">
           <mat-label>Status</mat-label>
           <mat-select [(ngModel)]="appointment.status" name="status">
-            <mat-option *ngFor="let status of appointmentStatusOptions" [value]="status"> {{status | titlecase}} </mat-option>
+            <mat-option *ngFor="let status of this.appointmentsService.appointmentStatusOptions" [value]="status"> {{status | titlecase}} </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-list-item>

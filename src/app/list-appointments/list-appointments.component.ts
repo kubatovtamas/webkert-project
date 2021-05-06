@@ -9,7 +9,7 @@ import {AppointmentsService} from '../shared/appointments.service';
   styleUrls: ['./list-appointments.component.css']
 })
 export class ListAppointmentsComponent implements OnInit {
-  mockAppointments = this.appointmentsService.mockAppointments;
+  appointmentList;
 
   constructor(private appointmentsService: AppointmentsService) { }
 
@@ -25,11 +25,13 @@ export class ListAppointmentsComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
 
   ngOnInit(): void {
+    this.appointmentList = this.appointmentsService.get('appointments');
+    console.log(this.appointmentList);
   }
 
   delete(appointment): void {
-    const idx = this.mockAppointments.indexOf(appointment);
-    this.mockAppointments.splice(idx, 1);
+    const idx = this.appointmentList.indexOf(appointment);
+    this.appointmentList.splice(idx, 1);
     this.table.renderRows();
   }
 }

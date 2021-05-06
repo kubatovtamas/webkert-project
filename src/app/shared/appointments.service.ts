@@ -1,60 +1,52 @@
 import { Injectable } from '@angular/core';
 import {Appointment} from './models/appointment-model';
+import {AngularFirestore, CollectionReference, Query} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentsService {
-  mockAppointments: Appointment[] = [
-    {
-      status: 'proposed',
-      participants: [
-        {status: 'needs-action', actor: 'patient', required: 'required'},
-        {status: 'accepted', actor: 'practitioner', required: 'required'}
-      ],
-      identifier: '1',
-      appointmentType: 'check-up',
-      priority: 5,
-      description: 'Testing description 123.',
-      start: new Date(2021, 5, 5, 13, 30),
-      duration: 30
-    },
-    {
-      status: 'pending',
-      participants: [
-        {status: 'needs-action', actor: 'patient', required: 'required'},
-        {status: 'accepted', actor: 'practitioner', required: 'required'},
-        {status: 'needs-action', actor: 'related-person', required: 'optional'}
-      ],
-      identifier: '2',
-      appointmentType: 'routine',
-      priority: 8,
-      description: 'Testing description 123.',
-      start: new Date(2022, 5, 12, 6, 0),
-      duration: 120
-    },
-    {
-      status: 'booked',
-      participants: [
-        {status: 'needs-action', actor: 'patient', required: 'required'},
-        {status: 'accepted', actor: 'practitioner', required: 'required'}
-      ],
-      identifier: '3',
-      appointmentType: 'walk-in',
-      priority: 3,
-      description: 'Testing description 123.',
-      start: new Date(2021, 5, 5, 10, 0),
-      duration: 60
-    }
-  ];
+  // getAppointmentById(id: string): Appointment {
+  //   // tslint:disable-next-line:prefer-for-of
+  //   for (let i = 0; i < this.mockAppointments.length; i++) {
+  //     if (this.mockAppointments[i].identifier === id) { return this.mockAppointments[i]; }
+  //   }
+  //   return null;
+  // }
 
-  getAppointmentById(id: string): Appointment {
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.mockAppointments.length; i++) {
-      if (this.mockAppointments[i].identifier === id) { return this.mockAppointments[i]; }
-    }
-    return null;
+  appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
+  appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
+
+  participantStatusOptions = ['accepted', 'declined', 'tentative', 'needs-action'];
+  participantActorOptions = ['patient', 'practitioner', 'practitioner-role', 'related-person', 'device', 'healthcare-service', 'location'];
+  participantRequiredOptions = ['required', 'optional', 'information-only'];
+
+  constructor(private afs: AngularFirestore) { }
+
+  async add(collectionName: string, data: Appointment, id?: string): Promise<string> {
+    const uid = id ? id : this.afs.createId();
+    // data.id = uid;
+    await this.afs.collection(collectionName).doc(uid).set(data);
+    // await this.afs.collection(collectionName).add(data);
+    return uid;
   }
 
-  constructor() { }
+  get(collectionName: string): Observable<Appointment[]> {
+    return this.afs.collection(collectionName, ref  => {
+      const query: CollectionReference | Query = ref;
+      // query = query.orderBy('title', 'asc');
+      return query;
+    }).valueChanges() as Observable<Appointment[]>;
+  }
+
+  async update(collectionName: string, id: string, data: any): Promise<string> {
+    await this.afs.collection(collectionName).doc(id).update(data);  // data: egy objektum rész amire updatelni akarunk
+    return id;
+  }
+
+  async delete(collectionName: string, id: string): Promise<string> {
+    await this.afs.collection(collectionName).doc(id).delete();
+    return id;
+  }
 }

@@ -5,7 +5,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select [(ngModel)]="data.status" name="status">
-          <mat-option *ngFor="let status of participantStatusOptions" value="status"> {{status | titlecase}} </mat-option>
+          <mat-option *ngFor="let status of this.appointmentService.participantStatusOptions" value="status"> {{status | titlecase}} </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -13,7 +13,7 @@
         <mat-label>Actor</mat-label>
         <mat-select [(ngModel)]="data.actor" name="actor">
           <mat-option value=""></mat-option>
-          <mat-option *ngFor="let actor of participantActorOptions" value="actor"> {{actor | titlecase}} </mat-option>
+          <mat-option *ngFor="let actor of this.appointmentService.participantActorOptions" value="actor"> {{actor | titlecase}} </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -21,7 +21,7 @@
         <mat-label>Necessity</mat-label>
         <mat-select [(ngModel)]="data.required" name="required">
           <mat-option value=""></mat-option>
-          <mat-option *ngFor="let required of participantRequiredOptions" value="required"> {{required | titlecase}} </mat-option>
+          <mat-option *ngFor="let required of this.appointmentService.participantRequiredOptions" value="required"> {{required | titlecase}} </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-card-content>

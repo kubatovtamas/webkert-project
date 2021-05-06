@@ -1,7 +1,7 @@
 export interface Appointment {
   status: AppointmentStatus;
   participants: Participant[];
-  identifier?: string;
+  id?: string;
   appointmentType?: AppointmentType;
   priority?: number;
   description?: string;

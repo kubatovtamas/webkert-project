@@ -8,12 +8,13 @@ import { AddAppointmentComponent } from './add-appointment/add-appointment.compo
 import { ListAppointmentsComponent } from './list-appointments/list-appointments.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
-import { Appointment } from './shared/models/appointment-model';
 import {DialogDataExampleDialogComponent} from './add-appointment/dialog-data-example-dialog.component';
 import {FormsModule} from '@angular/forms';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {AppointmentsService} from './shared/appointments.service';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: 'list', component: ListAppointmentsComponent },
@@ -38,7 +39,9 @@ const routes: Routes = [
     NoopAnimationsModule,
     MaterialComponentsModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
   ],
   providers: [AppointmentsService],
   bootstrap: [AppComponent]

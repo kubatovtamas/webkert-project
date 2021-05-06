@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {DialogDataExampleDialogComponent} from './dialog-data-example-dialog.component';
 import {Participant, ParticipantActor, ParticipantRequired, ParticipantStatus} from '../shared/models/appointment-model';
 import {MatTable} from '@angular/material/table';
+import {AppointmentsService} from '../shared/appointments.service';
 
 
 @Component({
@@ -20,8 +21,8 @@ export class AddAppointmentComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
-  appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
+  // appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
+  // appointmentTypeOptions = ['check-up', 'emergency', 'follow-up', 'routine', 'walk-in'];
 
   mockParticipants: Participant[] = [];
 
@@ -29,7 +30,7 @@ export class AddAppointmentComponent implements OnInit {
   required: ParticipantRequired;
   status: ParticipantStatus;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public appointmentService: AppointmentsService) {}
 
   ngOnInit(): void {
   }

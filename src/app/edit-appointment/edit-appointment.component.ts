@@ -16,18 +16,18 @@ export class EditAppointmentComponent implements OnInit {
     'required',
   ];
 
-  appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
+  // appointmentStatusOptions = ['proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'no-show', 'entered-in-error', 'checked-in', 'wait-list'];
 
   appointment: Appointment;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private appointmentsService: AppointmentsService) { }
+              public appointmentsService: AppointmentsService) { }
 
   ngOnInit(): void {
     const params = this.route.snapshot.paramMap;
     const id = (params.get('id') as string);
-    this.appointment = this.appointmentsService.getAppointmentById(id);
+    // this.appointment = this.appointmentsService.getAppointmentById(id);
     console.log(this.appointment);
   }
 
