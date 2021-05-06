@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Appointment} from './models/appointment-model';
+import {Appointment, Participant} from './models/appointment-model';
 import {AngularFirestore, AngularFirestoreDocument, CollectionReference, Query} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
@@ -17,7 +17,7 @@ export class AppointmentsService {
 
   constructor(private afs: AngularFirestore) { }
 
-  async add(collectionName: string, data: Appointment, id?: string): Promise<string> {
+  async add(collectionName: string, data: Appointment | Participant, id?: string): Promise<string> {
     const uid = id ? id : this.afs.createId();
     data.id = uid;
     await this.afs.collection(collectionName).doc(uid).set(data);

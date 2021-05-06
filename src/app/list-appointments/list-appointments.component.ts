@@ -41,7 +41,8 @@ export class ListAppointmentsComponent implements OnInit {
       }
     );
 
-    this.appointmentsService.add('appointments', debugAppointment);
+    // DEBUG ADD
+    // this.appointmentsService.add('appointments', debugAppointment);
   }
 
   delete(id): void {

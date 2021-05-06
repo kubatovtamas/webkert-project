@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogDataExampleDialogComponent} from './dialog-data-example-dialog.component';
-import {Participant, ParticipantActor, ParticipantRequired, ParticipantStatus} from '../shared/models/appointment-model';
+import {Appointment, Participant, ParticipantActor, ParticipantRequired, ParticipantStatus} from '../shared/models/appointment-model';
 import {MatTable} from '@angular/material/table';
 import {AppointmentsService} from '../shared/appointments.service';
 
@@ -21,7 +21,8 @@ export class AddAppointmentComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  mockParticipants: Participant[] = [];
+  participantList: Participant[] = [];
+  appointment: Appointment;
 
   actor: ParticipantActor;
   required: ParticipantRequired;
@@ -38,7 +39,8 @@ export class AddAppointmentComponent implements OnInit {
       data: {
         actor: this.actor,
         required: this.required,
-        status: this.status}
+        status: this.status
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -49,15 +51,33 @@ export class AddAppointmentComponent implements OnInit {
       };
 
       if (newParticipant.actor && newParticipant.required && newParticipant.status) {
-        this.mockParticipants.push(newParticipant);
+        // Add created Participant to firestore
+        this.appointmentService.add('participants', newParticipant);
+
+        // Push to local Participant List
+        this.participantList.push(newParticipant);
+
+
+        // Update Appointment to include new the participant's reference
+        // const updatedParticipantList = this.appointment.participants;
+
+        // const updatedParticipantList = this.participantList;
+        // updatedParticipantList.push(newParticipant);
+        // this.appointmentService.update('participants', this.appointment.id, {
+        //   participants: updatedParticipantList
+        // });
+
         this.table.renderRows();
       }
     });
   }
 
   delete(participant): void {
-    const idx = this.mockParticipants.indexOf(participant);
-    this.mockParticipants.splice(idx, 1);
+    /*
+    Itt meg nem kell szerintem törölni db-ből, ottmarad leszarom XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd
+     */
+    const idx = this.participantList.indexOf(participant);
+    this.participantList.splice(idx, 1);
     this.table.renderRows();
   }
 }
