@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Appointment } from '../shared/models/appointment-model';
 import {MatTable} from '@angular/material/table';
 import {AppointmentsService} from '../shared/appointments.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-list-appointments',
   templateUrl: './list-appointments.component.html',
   styleUrls: ['./list-appointments.component.css']
 })
-export class ListAppointmentsComponent implements OnInit {
+export class ListAppointmentsComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [
     'status',
     'appointmentType',
@@ -19,6 +20,8 @@ export class ListAppointmentsComponent implements OnInit {
   ];
 
   appointmentList;
+
+  subscription: Subscription;
 
   @ViewChild(MatTable) table: MatTable<any>;
 
@@ -35,14 +38,15 @@ export class ListAppointmentsComponent implements OnInit {
       duration: 50
     };
 
-    this.appointmentsService.get('appointments').subscribe(
+    this.subscription = this.appointmentsService.get('appointments').subscribe(
       data => {
         this.appointmentList = data;
       }
     );
+  }
 
-    // DEBUG ADD
-    // this.appointmentsService.add('appointments', debugAppointment);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   delete(id): void {

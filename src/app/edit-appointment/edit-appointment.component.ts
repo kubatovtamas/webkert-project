@@ -32,11 +32,7 @@ export class EditAppointmentComponent implements OnInit {
       if (doc.exists) {
         this.appointment = doc.data();
 
-        this.appointmentsService.get('participants').subscribe(
-          data => {
-            this.participantList = data;
-          }
-        );
+        this.participantList = this.appointment.participants;
       }
     });
   }
@@ -45,5 +41,6 @@ export class EditAppointmentComponent implements OnInit {
     this.appointmentsService.update('appointments', this.appointment.id, {
         status: this.appointment.status
     });
+    this.router.navigate(['list']);
   }
 }

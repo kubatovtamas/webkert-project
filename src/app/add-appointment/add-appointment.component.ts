@@ -1,9 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogDataExampleDialogComponent} from './dialog-data-example-dialog.component';
-import {Appointment, Participant, ParticipantActor, ParticipantRequired, ParticipantStatus} from '../shared/models/appointment-model';
+import {
+  Appointment,
+  AppointmentStatus, AppointmentType,
+  Participant,
+  ParticipantActor,
+  ParticipantRequired,
+  ParticipantStatus
+} from '../shared/models/appointment-model';
 import {MatTable} from '@angular/material/table';
 import {AppointmentsService} from '../shared/appointments.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -11,7 +19,8 @@ import {AppointmentsService} from '../shared/appointments.service';
   templateUrl: './add-appointment.component.html',
   styleUrls: ['./add-appointment.component.css']
 })
-export class AddAppointmentComponent implements OnInit {
+export class AddAppointmentComponent implements OnInit, DoCheck {
+
   displayedColumns: string[] = [
     'actor',
     'status',
@@ -21,25 +30,37 @@ export class AddAppointmentComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
+  // New Appointment:
+  newAppointmentStatus: AppointmentStatus;
+  newAppointmentType: AppointmentType;
+  newAppointmentPriority = 5;
+  newAppointmentDescription: string;
+  newAppointmentStart: Date;
+  newAppointmentDuration = 30;
+
+  // New Participants List:
+  participantActor: ParticipantActor;
+  participantRequired: ParticipantRequired;
+  participantStatus: ParticipantStatus;
   participantList: Participant[] = [];
-  appointment: Appointment;
 
-  actor: ParticipantActor;
-  required: ParticipantRequired;
-  status: ParticipantStatus;
-
-  constructor(public dialog: MatDialog, public appointmentService: AppointmentsService) {}
+  constructor(public dialog: MatDialog, public appointmentService: AppointmentsService, private router: Router) {}
 
   ngOnInit(): void {
+  }
+
+  ngDoCheck(): void {
+    // Debug log participants
+    console.log('Participant list:', this.participantList);
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogDataExampleDialogComponent, {
       height: '50%',
       data: {
-        actor: this.actor,
-        required: this.required,
-        status: this.status
+        actor: this.participantActor,
+        required: this.participantRequired,
+        status: this.participantStatus
       }
     });
 
@@ -51,21 +72,7 @@ export class AddAppointmentComponent implements OnInit {
       };
 
       if (newParticipant.actor && newParticipant.required && newParticipant.status) {
-        // Add created Participant to firestore
-        this.appointmentService.add('participants', newParticipant);
-
-        // Push to local Participant List
         this.participantList.push(newParticipant);
-
-
-        // Update Appointment to include new the participant's reference
-        // const updatedParticipantList = this.appointment.participants;
-
-        // const updatedParticipantList = this.participantList;
-        // updatedParticipantList.push(newParticipant);
-        // this.appointmentService.update('participants', this.appointment.id, {
-        //   participants: updatedParticipantList
-        // });
 
         this.table.renderRows();
       }
@@ -73,11 +80,24 @@ export class AddAppointmentComponent implements OnInit {
   }
 
   delete(participant): void {
-    /*
-    Itt meg nem kell szerintem törölni db-ből, ottmarad leszarom XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd
-     */
     const idx = this.participantList.indexOf(participant);
     this.participantList.splice(idx, 1);
     this.table.renderRows();
+  }
+
+  submit(): void {
+    const newAppointment: Appointment = {
+      status: this.newAppointmentStatus,
+      participants: this.participantList,
+      appointmentType: this.newAppointmentType,
+      priority: this.newAppointmentPriority,
+      description: this.newAppointmentDescription,
+      start: this.newAppointmentStart,
+      duration: this.newAppointmentDuration
+    };
+
+    this.appointmentService.add('appointments', newAppointment);
+
+    this.router.navigate(['list']);
   }
 }

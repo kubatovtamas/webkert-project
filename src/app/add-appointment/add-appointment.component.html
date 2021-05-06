@@ -4,26 +4,26 @@
   <mat-card-content>
     <mat-form-field appearance="fill">
       <mat-label>Status</mat-label>
-      <mat-select>
+      <mat-select [(ngModel)]="newAppointmentStatus">
         <mat-option value=""></mat-option>
-        <mat-option *ngFor="let status of this.appointmentService.appointmentStatusOptions" value="status"> {{status | titlecase}} </mat-option>
+        <mat-option *ngFor="let status of this.appointmentService.appointmentStatusOptions" [value]="status"> {{status | titlecase}} </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-label>Appointment Type</mat-label>
-    <mat-button-toggle-group vertical name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle *ngFor="let type of this.appointmentService.appointmentTypeOptions" value="type"> {{type | titlecase}}</mat-button-toggle>
+    <mat-button-toggle-group vertical name="fontStyle" aria-label="Font Style" [(ngModel)]="newAppointmentType">
+        <mat-button-toggle *ngFor="let type of this.appointmentService.appointmentTypeOptions" [value]="type"> {{type | titlecase}}</mat-button-toggle>
     </mat-button-toggle-group>
 
     <mat-label>Priority</mat-label>
-    <mat-slider color="primary" thumbLabel min="1" max="10" step="1" value="5"></mat-slider>
+    <mat-slider color="primary" thumbLabel min="1" max="10" step="1" value="5" [(ngModel)]="newAppointmentPriority"></mat-slider>
 
     <mat-label>Duration (minutes)</mat-label>
-    <mat-slider color="primary" thumbLabel min="10" max="120" step="10" value="30"></mat-slider>
+    <mat-slider color="primary" thumbLabel min="10" max="120" step="10" value="30" [(ngModel)]="newAppointmentDuration"></mat-slider>
 
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea matInput></textarea>
+      <textarea matInput [(ngModel)]="newAppointmentDescription"></textarea>
     </mat-form-field>
 
     <button mat-raised-button color="primary" (click)="openDialog()">Add Participants</button>
@@ -58,7 +58,7 @@
     </table>
 
     <mat-form-field>
-      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Start Time">
+      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Start Time" [(ngModel)]="newAppointmentStart">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #picker touchUi="true" showSeconds="false">
         <ng-template>
@@ -69,7 +69,7 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary">Submit</button>
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
     <button mat-raised-button routerLink="/list">Back</button>
   </mat-card-actions>
 </mat-card>

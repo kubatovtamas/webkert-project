@@ -5,3 +5,11 @@ table tr td {
 table.mat-table {
   width: 100%;
 }
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  justify-content: center;
+  text-align: center;
+}
